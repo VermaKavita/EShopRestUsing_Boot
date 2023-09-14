@@ -1,13 +1,12 @@
 package com.ecom.shopping_cart.services;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.ecom.shopping_cart.entities.ItemCategory;
+import com.ecom.shopping_cart.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecom.shopping_cart.entities.ItemCategory;
-import com.ecom.shopping_cart.repository.CategoryRepository;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CatgoryService {

@@ -117,9 +117,9 @@ public class ExcelHelper {
                 Cell cell = headerRow.createCell ( col );
                 cell.setCellValue ( HEADERs.get ( col ) );
             }
-            AtomicInteger rowIdx = new AtomicInteger ( 1 );
+            AtomicInteger rowIndx = new AtomicInteger ( 1 );
             products.forEach ( product -> {
-                Row row = sheet.createRow ( rowIdx.getAndIncrement () );
+                Row row = sheet.createRow ( rowIndx.getAndIncrement () );
                 row.createCell ( 0 ).setCellValue ( product.getpId () );
                 row.createCell ( 1 ).setCellValue ( product.getpName () );
                 row.createCell ( 2 ).setCellValue ( product.getPrice () );
@@ -151,10 +151,11 @@ public class ExcelHelper {
         products.forEach ( user -> {
             table.addCell ( String.valueOf ( user.getpId () ) );
             table.addCell ( user.getpName () );
-            table.addCell ( user.getCategory ().getCategory () );
-            table.addCell ( user.getDetails () );
-            table.addCell ( String.valueOf ( user.getQty () ) );
             table.addCell ( String.valueOf ( user.getPrice () ) );
+            table.addCell ( user.getDetails () );
+            table.addCell ( user.getThumbnail () );
+            table.addCell ( String.valueOf ( user.getQty () ) );
+            table.addCell ( user.getCategory ().getCategory () );
         } );
     }
     public void export(HttpServletResponse response) throws DocumentException, IOException {
@@ -167,9 +168,9 @@ public class ExcelHelper {
         Paragraph p = new Paragraph ( "List of Products", font );
         p.setAlignment ( Paragraph.ALIGN_CENTER );
         document.add ( p );
-        PdfPTable table = new PdfPTable ( 6 );
+        PdfPTable table = new PdfPTable ( 7 );
         table.setWidthPercentage ( 100f );
-        table.setWidths ( new float[]{1.5f, 3.5f, 3.0f, 3.0f, 1.5f, 1.5f} );
+        table.setWidths ( new float[]{1.5f, 2.5f, 2.0f, 3.5f, 2.5f, 1.5f,2.0f} );
         table.setSpacingBefore ( 10 );
         writeTableHeader ( table );
         writeTableData ( table );

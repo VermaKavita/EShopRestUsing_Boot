@@ -17,13 +17,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/product")
 public class ProductController {
@@ -35,10 +35,10 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 
-	@GetMapping("/list")
-	public ResponseEntity<?> getProductList(){
-		return ResponseEntity.ok (productService.getProList());
-	}
+//	@GetMapping("/list")
+//	public ResponseEntity<?> getProductList(){
+//		return ResponseEntity.ok (productService.getProList());
+//	}
 
 	@PostMapping("/")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
@@ -123,6 +123,12 @@ public class ProductController {
 		ExcelHelper exporter = new ExcelHelper (products);
 		exporter.export( response );
 
+	}
+
+	@GetMapping("/global/{name}")
+	public ResponseEntity<List<Product>> globalSearch(@PathVariable String name){
+		List<Product> list=productService.globalSer ( name );
+		return ResponseEntity.status(HttpStatus.OK).body( list );
 	}
 
 }

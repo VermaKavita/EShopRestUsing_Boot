@@ -7,17 +7,11 @@ import com.ecom.shopping_cart.repository.CategoryRepository;
 import com.ecom.shopping_cart.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -27,14 +21,14 @@ public class ProductService {
 	CategoryRepository categoryRepository;
 	@Autowired
 	ProductRepository productRepository;
-	@Autowired
-	RestTemplate restTemplate;
-	public String getProList(){
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept( Arrays.asList( MediaType.APPLICATION_JSON));
-		HttpEntity<String> entity = new HttpEntity<String> ( ( headers ) );
-		return restTemplate.exchange("http://localhost:8081/product/", HttpMethod.GET,entity,String.class).getBody ();
-	}
+//	@Autowired
+//	RestTemplate restTemplate;
+//	public String getProList(){
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept( Arrays.asList( MediaType.APPLICATION_JSON));
+//		HttpEntity<String> entity = new HttpEntity<String> ( ( headers ) );
+//		return restTemplate.exchange("http://localhost:8081/product/", HttpMethod.GET,entity,String.class).getBody ();
+//	}
 	public Product saveProduct(Product product) {
 		product.setThumbnail(product.getThumbnail());
 		 int categoryId = product.getCategory().getCat_id();
@@ -67,11 +61,13 @@ public class ProductService {
 	    }
 	  }
 	
-	 public ByteArrayInputStream load() {
+	public ByteArrayInputStream load() {
 		    List<Product> products = productRepository.findAll();
 
 		    ByteArrayInputStream in = ExcelHelper.productsToExcel(products);
 		    return in;
 		  }
-
+	public 	List<Product> globalSer(String name){
+		return productRepository.globalAPi ( name );
+	}
 }

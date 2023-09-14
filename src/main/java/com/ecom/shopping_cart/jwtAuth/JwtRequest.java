@@ -2,9 +2,7 @@ package com.ecom.shopping_cart.jwtAuth;
 
 public class JwtRequest {
     String username;
-    String password;
-
-   
+    String password; 
 
     public String getUsername() {
 		return username;

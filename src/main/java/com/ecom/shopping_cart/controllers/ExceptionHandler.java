@@ -1,11 +1,10 @@
 package com.ecom.shopping_cart.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.http.ResponseEntity;
 @ControllerAdvice
 public class ExceptionHandler {
 

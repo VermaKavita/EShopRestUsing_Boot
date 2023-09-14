@@ -1,9 +1,9 @@
 package com.ecom.shopping_cart.entities;
 
-import java.util.Set;
-
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+
+import java.util.Set;
 
 public class SignUpRequest {
 	private String username;

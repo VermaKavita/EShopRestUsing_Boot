@@ -11,6 +11,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,11 +33,13 @@ public class SecurityConfiguration {
 	@Autowired
 	private JwtAuthenticationFilter filter;
 
-	private String WISHLIST[]={
+	private  String WISHLIST[]={
 			"/jwt",
 			"/product/**",
 			"/swagger-ui/**",
-			"/v3/api-docs/",
+			"/swagger-ui.html",
+			"/v3/api-docs/**",
+			"/actuator/**",
 			"/hello",
 			"/register"
 	};
@@ -74,5 +77,8 @@ public class SecurityConfiguration {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
 		return builder.getAuthenticationManager();
 	}
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().requestMatchers("/swagger-ui/**", "/v3/api-docs/**");
+		 }
 
 }
